@@ -62,8 +62,8 @@
 
 ## 4. 進捗管理ルール
 
-- AGENTS に従った進捗はこのファイル末尾に追記する。
-- 再開時はまず末尾ログの最新エントリから「次に何をやるか」を引き継ぐ。
+- AGENTS に従った進捗は別ファイルの [LEARNING_LOG.md](/Users/skanno/project/shinyak/git-submodule-practice/LEARNING_LOG.md) に追記する。
+- 再開時はまず `LEARNING_LOG.md` の最新エントリから「次に何をやるか」を引き継ぐ。
 - 進捗は以下 5 段階:
   - `未着手`
   - `進行中`
