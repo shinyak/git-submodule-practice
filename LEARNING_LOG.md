@@ -1,5 +1,20 @@
 # 学習ログ
 
+## 2026-03-15（再開準備・本日終了）
+
+- 日付:
+  - `日時: 2026-03-15`
+  - `目的: 次回セッション再開時に迷わないための記録を残す`
+  - `ステータス: 再確認必要`
+  - `実行コマンド:`
+    - `apply_patch（AGENTS.md / LEARNING_LOG.md の更新）`
+  - `観測結果:`
+    - `AGENTS.md に再開時ゲート（git status / git log / git submodule status 判定）を追加`
+    - `LEARNING_LOG.md に未着手起点の初期エントリを追加し、次回再開位置を固定`
+  - `次アクション:`
+    - `次回: git status / git log --oneline -n 8 / git submodule status を実行`
+    - `submodule status の結果で Phase2 / Phase3 / Phase5 へ分岐して再開`
+
 ## 2026-03-15（再開導線整備）
 
 - 日付:
