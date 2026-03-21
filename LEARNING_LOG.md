@@ -1,5 +1,28 @@
 # 学習ログ
 
+## 2026-03-21（Phase2 進行）
+
+- 日付:
+  - `日時: 2026-03-21`
+  - `フェーズ: Phase2`
+  - `目的: GitHub 経由でサブモジュールを親リポジトリへ追加し、差分をコミット可能な状態にする`
+  - `ステータス: 完了`
+  - `実行コマンド:`
+    - `git submodule add git@github.com:shinyak/git-submodule-practice-child.git submodules/child`
+    - `git submodule status`
+    - `git status --short`
+    - `git diff --cached`
+    - `git commit -m "add submodule: git-submodule-practice-child"`
+    - `git status --short`
+  - `観測結果:`
+    - `成功: submodule status が ec7280f... submodules/child (heads/main) を表示`
+    - `成功: .gitmodules の追加と gitlink(160000) のステージング差分を確認`
+    - `成功: ステータスは最終的にクリーン（`git status --short` が空）`
+  - `現状: submodule add により親に子リポジトリ参照が確立`
+  - `達成: `.gitmodules` と gitlink の追加内容を理解した`
+  - `次: `git submodule init` / `git submodule update` の違い検証へ`
+  - `次アクション: 初期化・取得フローの確認を1コマンドずつ進める`
+
 ## 2026-03-15（再開準備・本日終了）
 
 - 日付:
