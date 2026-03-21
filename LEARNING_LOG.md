@@ -1,5 +1,38 @@
 # 学習ログ
 
+## 2026-03-21（本日ここまで）
+
+- 日付:
+  - `日時: 2026-03-21`
+  - `フェーズ: Phase3`
+  - `目的: 子リポジトリ更新後の追従（+表示→親更新）を完了し、Phase4へ移る前提条件を整える`
+  - `ステータス: 再確認必要`
+  - `実行コマンド:`
+    - `git status --short -b`
+    - `git log --oneline -n 8`
+    - `git submodule status`
+    - `git -C submodules/child log -1 --oneline`
+    - `git -C submodules/child rev-parse --short HEAD`
+    - `git rev-parse --short HEAD`
+    - `git submodule deinit -f submodules/child`
+    - `git submodule update --init --recursive submodules/child`
+    - `cd ~/project/shinyak/git-submodule-practice-child && echo "updated child content" >> child.txt && git add child.txt && git commit -m "update child content"`
+    - `git -C ~/project/shinyak/git-submodule-practice-child push origin main`
+    - `git -C submodules/child fetch --all --prune && git -C submodules/child checkout origin/main`
+    - `git add submodules/child`
+    - `git ci -m"update submodule child"`
+  - `観測結果:`
+    - `成功: git submodule status でdeinit後の - 表示と再取得後の通常表示を確認`
+    - `成功: 子側で 0027793 update child content コミットを作成`
+    - `成功: 子リポジトリを push して origin へ反映`
+    - `成功: git submodule status が +0027793... (remotes/origin/HEAD) を表示（親参照との差分を検知）`
+    - `成功: 親で submodules/child をステージし、update submodule child をコミット`
+    - `成功: git log --oneline -n 5 --submodule で 683b238 update submodule child を確認`
+  - `現状: Phase3 の主要ループ（+検知→parent更新コミット）完了。次アクションの branch --show-current は未実行`
+  - `達成: 子更新→push→親追従の一連操作を実体験`
+  - `次: Phase4 準備（branch --show-current → git submodule update --remote の挙動確認）`
+  - `次アクション: 次回は git -C ~/project/shinyak/git-submodule-practice-child branch --show-current から再開`
+
 ## 2026-03-21（Phase2 進行）
 
 - 日付:
