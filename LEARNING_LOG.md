@@ -1,5 +1,58 @@
 # 学習ログ
 
+## 2026-03-22（Phase4 追従運用確認）
+
+- 日付:
+  - `日時: 2026-03-22`
+  - `フェーズ: Phase4`
+  - `目的: submodule の detached HEAD と git submodule update --remote の挙動を観察し、親側の gitlink 更新まで完了する`
+  - `ステータス: 完了`
+  - `実行コマンド:`
+    - `git status`
+    - `git log --oneline -n 8`
+    - `git submodule status`
+    - `git -C submodules/child branch --show-current`
+    - `git -C submodules/child symbolic-ref -q HEAD`
+    - `git -C submodules/child rev-parse --short HEAD`
+    - `git config -f .gitmodules --get-regexp '^submodule\..*'`
+    - `git config --get-regexp '^submodule\..*\.branch$'`
+    - `git -C submodules/child symbolic-ref refs/remotes/origin/HEAD`
+    - `git -C submodules/child log --oneline --decorate -1 origin/main`
+    - `cd ~/project/shinyak/git-submodule-practice-child`
+    - `git status`
+    - `cat child.txt`
+    - `echo "phase4 remote update test" >> child.txt`
+    - `git diff`
+    - `git add child.txt`
+    - `git commit -m "phase4 remote update test"`
+    - `git push origin main`
+    - `cd ~/project/shinyak/git-submodule-practice`
+    - `git -C submodules/child rev-parse --short HEAD`
+    - `git -C submodules/child fetch origin`
+    - `git -C submodules/child log --oneline --decorate -1 origin/main`
+    - `git submodule update --remote submodules/child`
+    - `git status`
+    - `git submodule status`
+    - `git add submodules/child`
+    - `git commit -m "update submodule child to phase4 test commit"`
+    - `git log --oneline -n 1`
+    - `git status`
+    - `git push origin main`
+  - `観測結果:`
+    - `成功: submodules/child は branch --show-current と symbolic-ref -q HEAD が空で、detached HEAD 状態を確認`
+    - `成功: .gitmodules と .git/config に submodule.<name>.branch 未設定であることを確認`
+    - `成功: submodule 側の origin/HEAD は refs/remotes/origin/main を指していることを確認`
+    - `成功: 子リポジトリで 44ddf94 phase4 remote update test を作成し origin/main へ push`
+    - `成功: 親配下の submodule は update --remote 前は 0027793、fetch 後の origin/main は 44ddf94 を指すことを確認`
+    - `成功: git submodule update --remote submodules/child 実行後、submodule 実体が 44ddf94 へ更新`
+    - `成功: 親の git status で modified: submodules/child (new commits)、git submodule status で +44ddf94... を確認`
+    - `成功: 親で git add submodules/child と commit を行い、git submodule status が clean 表示へ戻ることを確認`
+    - `成功: 親の dd374fb update submodule child to phase4 test commit を push して origin/main と同期`
+  - `現状: Phase4 の update --remote 基本観察は完了。親・子ともに main が origin と同期し、submodule status は clean`
+  - `達成: detached HEAD / remote追従 / +表示 / gitlink更新コミットのつながりを実地で確認した`
+  - `次: Phase4 継続として submodule.<name>.branch と submodule.<name>.update の設定差を検証する`
+  - `次アクション: 次回は git config -f .gitmodules --get-regexp '^submodule\\..*\\.(branch|update)$' から再開`
+
 ## 2026-03-21（本日ここまで）
 
 - 日付:
