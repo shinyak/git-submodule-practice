@@ -1,5 +1,40 @@
 # 学習ログ
 
+## 2026-03-22（Phase4 設定差の確認）
+
+- 日付:
+  - `日時: 2026-03-22`
+  - `フェーズ: Phase4`
+  - `目的: .gitmodules の branch / update 設定と git submodule sync の反映範囲を観察する`
+  - `ステータス: 進行中`
+  - `実行コマンド:`
+    - `git config -f .gitmodules --get-regexp '^submodule\\..*\\.\\(branch\\|update\\)$'`
+    - `git config --get-regexp '^submodule\\..*\\.\\(branch\\|update\\)$'`
+    - `git config --get-regexp '^submodule\\.'`
+    - `git config -f .gitmodules submodule.submodules/child.branch main`
+    - `git config -f .gitmodules --get-regexp '^submodule\\..*'`
+    - `git config --get-regexp '^submodule\\..*\\.branch$'`
+    - `git submodule sync -- submodules/child`
+    - `git config --get-regexp '^submodule\\..*\\.branch$'`
+    - `git config -f .gitmodules submodule.submodules/child.update merge`
+    - `git config -f .gitmodules --get-regexp '^submodule\\..*'`
+    - `git status --short`
+    - `git diff -- .gitmodules`
+    - `git config --get-regexp '^submodule\\..*\\.update$'`
+    - `git submodule status`
+  - `観測結果:`
+    - `成功: .gitmodules と .git/config のどちらにも branch / update が未設定の初期状態を確認`
+    - `成功: ローカル設定には submodule.submodules/child.active true と url のみがあり、branch / update は存在しないことを確認`
+    - `成功: .gitmodules に branch = main を追加しても、.git/config の branch 設定には即時反映されないことを確認`
+    - `成功: git submodule sync -- submodules/child は "Synchronizing submodule url" を表示し、branch は .git/config に現れないことを確認`
+    - `成功: .gitmodules に update = merge を追加し、git diff で branch = main / update = merge の2行追加を確認`
+    - `成功: .git/config に update も現れず、今回の設定変更は .gitmodules の差分としてのみ存在することを確認`
+    - `成功: git submodule status は clean のままで、設定変更は submodule のコミット参照を変えないことを確認`
+  - `現状: .gitmodules のみ変更中（M .gitmodules）。submodule 実体と gitlink は 44ddf94 のままで clean`
+  - `達成: branch は追従先、update は更新方法、sync は主に URL 同期という切り分けを確認した`
+  - `次: branch / update をコミットするか、あるいはいったん戻して別設定値を比較するかを決める`
+  - `次アクション: 次回は git add .gitmodules から進めて設定変更をコミットするか、git restore .gitmodules で比較実験を続けるか判断する`
+
 ## 2026-03-22（Phase4 追従運用確認）
 
 - 日付:
