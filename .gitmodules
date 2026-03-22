@@ -1,3 +1,5 @@
 [submodule "submodules/child"]
 	path = submodules/child
 	url = git@github.com:shinyak/git-submodule-practice-child.git
+	branch = main
+	update = merge
